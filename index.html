@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hexco — Connect investors, clients & freelancers</title>
+<meta name="description" content="Connect investors, clients & freelancers to grow your business network" />
+<style>
+  /* ---------- Simple modern light theme ---------- */
+  :root{
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --text: #0f172a;
+    --accent: #6f28c6; /* purple accent to match logo */
+    --accent-2: #0ea5a4;
+    --radius: 12px;
+    --maxw: 1100px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body {
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ✅ Transparent logo background fix */
+header img {
+  background: transparent !important;
+}
+
+    header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #f8f9fb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+};align-items:center;justify-content:center}
+  .logo img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
+  .title{font-weight:800;font-size:18px;line-height:1}
+  .subtitle{font-size:13px;color:var(--muted);margin-top:2px}
+  nav{display:flex;gap:12px;align-items:center}
+  nav a{padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600}
+  nav a:hover{background:#eef2ff;color:var(--text)}
+  .top-actions{display:flex;gap:10px;align-items:center}
+  .btn{padding:8px 12px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white}
+  .btn-ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--text)}
+
+  /* hero/search area */
+  .hero{
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:20px;
+  align-items:start;
+  margin-top:120px; /* 👈 added this line */
+  margin-bottom:18px;
+}
+  .panel{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+  .search-row{display:flex;gap:10px}
+  .search-row input{flex:1;padding:12px;border-radius:10px;border:1px solid #e6eef8;background:transparent}
+  .search-row button{padding:10px 12px;border-radius:10px;border:0;background:var(--accent);color:white}
+
+  /* layout */
+  .layout{display:grid;grid-template-columns:1fr 320px;gap:20px}
+  .feed{display:flex;flex-direction:column;gap:14px}
+  .post{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.03)}
+  .post .meta{display:flex;align-items:center;gap:12px}
+  .avatar{width:44px;height:44px;border-radius:10px;overflow:hidden;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
+  .post h3{margin:8px 0 6px}
+  .post p{margin:0;color:#373b48}
+  .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+  .tag{padding:6px 8px;border-radius:8px;background:#f3f4f6;color:var(--muted);font-weight:700;font-size:13px}
+
+  /* image/video card styles */
+  .media{margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid rgba(15,23,42,0.04);background:#f8fafc}
+  .media svg,.media img{display:block;width:100%;height:auto}
+  .video-poster{position:relative;display:block;height:220px;background:linear-gradient(180deg,#f3f0ff,#fff);display:flex;align-items:center;justify-content:center}
+  .play-btn{position:absolute;display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:999px;background:rgba(15,23,42,0.85);color:white;font-size:22px;border:6px solid rgba(255,255,255,0.12)}
+  .post small{color:var(--muted);display:block;margin-top:6px}
+
+  /* sidebar widgets */
+  aside .widget{margin-bottom:12px}
+  .widget h4{margin:0 0 8px;font-size:15px}
+  .small-muted{color:var(--muted);font-size:13px}
+
+  /* create post area */
+  .create-row{display:flex;gap:10px;align-items:flex-start}
+  .create-row textarea{flex:1;padding:12px;border-radius:10px;border:1px solid #eef2ff;resize:vertical}
+  .create-row input[type=file]{display:block}
+  .uploader{display:flex;gap:8px;flex-direction:column}
+
+  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px;margin-bottom:40px}
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr}
+    .layout{grid-template-columns:1fr}
+    nav{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background-color: #f8f9fb; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);">
+  <!-- Left side: Logo + Text -->
+  <div style="display: flex; align-items: center; gap: 16px;">
+    <img src="HEXCO-01.png" alt="Hexco logo"
+     style="width: 60px; height: 60px; object-fit: contain; background: transparent; border: none; margin-top: 4px;">
+    <div>
+      <h1 style="margin: 0; font-size: 26px; font-weight: 700; color: #0b0b0b;">Hexco</h1>
+      <p style="margin: 2px 0 0; font-size: 15px; color: #555;">
+  Grow your business network
+</p>
+    </div>
+  </div>
+
+  <!-- Right side: Buttons -->
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <button style="padding: 10px 20px; border: 1px solid #ddd; background: #fff; border-radius: 10px; cursor: pointer; font-weight: 500;">
+      Create profile
+    </button>
+    <button style="padding: 10px 20px; border: none; background: linear-gradient(90deg, #6b1bc5, #9b4dff); color: white; border-radius: 10px; cursor: pointer; font-weight: 600;">
+      New post
+    </button>
+  </div>
+</header>
+
+  <!-- hero / search -->
+  <section class="hero">
+    <div class="panel">
+      <h2 style="margin:0 0 8px">Discover talent & projects</h2>
+      <div class="small-muted">Search people by role, skill or keyword. Explore demo posts below to see how Hexco works.</div>
+
+      <div style="margin-top:12px" class="search-row">
+        <input id="searchInput" placeholder="Search by role or skill (e.g. designer, marketer, photographer)" />
+        <button onclick="searchFeed()">Search</button>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px">
+        <div style="flex:1">
+          <label class="small-muted">Filter by category</label>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="tag" onclick="filterCategory('All')">All</button>
+            <button class="tag" onclick="filterCategory('Startup')">Startup</button>
+            <button class="tag" onclick="filterCategory('Design')">Design</button>
+            <button class="tag" onclick="filterCategory('Tech')">Tech</button>
+            <button class="tag" onclick="filterCategory('Marketing')">Marketing</button>
+          </div>
+        </div>
+        <div style="width:160px;text-align:right">
+          <div class="small-muted">Contact</div>
+          <div style="font-weight:700">hexcosr@gmail.com</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="panel" style="height:100%;">
+      <h4 style="margin-top:0">Share an idea</h4>
+      <div class="small-muted">Post text, images or video — this demo stores posts locally in your browser session only.</div>
+
+      <form id="postForm" onsubmit="event.preventDefault(); submitPost()">
+        <div style="margin-top:12px">
+          <textarea id="postText" rows="4" placeholder="Write your idea or project description..."></textarea>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <input id="postImage" type="file" accept="image/*" />
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn btn-ghost" type="button" onclick="clearCreate()">Clear</button>
+          <button class="btn btn-primary" type="submit">Post</button>
+        </div>
+      </form>
+    </aside>
+  </section>
+
+  <!-- main layout: feed + sidebar -->
+  <main class="layout">
+    <section class="feed" id="feed">
+      <!-- demo posts will appear here -->
+    </section>
+
+    <aside>
+      <div class="panel widget">
+        <h4>Top Skills</h4>
+        <div class="small-muted">UI Design · WordPress · Mobile Dev · Product Photography · Marketing</div>
+      </div>
+
+      <div class="panel widget">
+        <h4>New members</h4>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+          <div style="flex:1">
+            <div style="font-weight:700">Anu L.</div>
+            <div class="small-muted">UI/UX Designer</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted)">2d</div>
+        </div>
+        <hr style="border:none;border-top:1px solid #f3f4f6;margin:10px 0">
+        <div style="display:flex;gap:8px;align-items:center">
+          <div style="flex:1">
+            <div style="font-weight:700">Raj P.</div>
+            <div class="small-muted">Founder · Logistics</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted)">5d</div>
+        </div>
+      </div>
+
+      <div class="panel widget">
+        <h4>Contact</h4>
+        <div class="small-muted">Email: <a href="mailto:hexcosr@gmail.com">hexcosr@gmail.com</a></div>
+        <div class="small-muted" style="margin-top:8px">Phone: +91 7012971652</div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    © Hexco — Connect investors, clients & freelancers · Demo feed (no backend)
+  </footer>
+</div>
+
+<!-- ---------- Demo & behavior script ---------- -->
+<script>
+  // Demo posts dataset (startup, design, tech posts). Images are inline SVG placeholders.
+  const demoPosts = [
+    {
+      id: 'p1',
+      author: 'Anu L.',
+      role: 'UI/UX Designer',
+      category: 'Design',
+      title: 'Mobile App UI for food delivery',
+      text: 'Designed an end-to-end UI for a food delivery app. Looking for a Flutter developer to build the app. Budget: ₹40,000.',
+      media: { type: 'image', src: svgPlaceholder('Project shot — food app', 800, 420, '#f8fafc', '#efe6ff') },
+      created: '2 days ago'
+    },
+    {
+      id: 'p2',
+      author: 'Raj P.',
+      role: 'Founder · Logistics',
+      category: 'Startup',
+      title: 'Seeking seed investors',
+      text: 'We have an early-stage SaaS product for freight optimization. Seeking seed funding & mentors. Pitch deck available on request.',
+      media: null,
+      created: '5 days ago'
+    },
+    {
+      id: 'p3',
+      author: 'Maya S.',
+      role: 'Product Photographer',
+      category: 'Design',
+      title: 'Product shoot samples',
+      text: 'Here are sample photos from a recent e-commerce shoot. Open to freelance gigs and collaborations.',
+      media: { type: 'image', src: svgPlaceholder('Product photography sample', 800, 420, '#fffaf0', '#fff0e6') },
+      created: '1 week ago'
+    },
+    {
+      id: 'p4',
+      author: 'Dev Team',
+      role: 'Tech · Backend',
+      category: 'Tech',
+      title: 'Demo: Video walkthrough',
+      text: 'Short walkthrough video for a prototype (click play to open modal).',
+      media: { type: 'video', src: null }, // video placeholder; clicking opens upload dialog or later attach real file
+      created: '3 days ago'
+    },
+    {
+      id: 'p5',
+      author: 'Nikhil',
+      role: 'Marketing',
+      category: 'Marketing',
+      title: 'Campaign idea — Social growth',
+      text: 'Proposed 3-phase social growth campaign for a D2C brand. Looking for creative writers and designers to join.',
+      media: null,
+      created: '6 hours ago'
+    }
+  ];
+
+  // Render feed
+  const feedEl = document.getElementById('feed');
+  function renderFeed(list = demoPosts) {
+    feedEl.innerHTML = '';
+    if (!list.length) {
+      feedEl.innerHTML = '<div class="panel"><div class="small-muted">No posts found.</div></div>';
+      return;
+    }
+    list.forEach(p => {
+      const post = document.createElement('article');
+      post.className = 'post';
+      post.dataset.category = p.category;
+      post.innerHTML = `
+        <div class="meta">
+          <div class="avatar">${initials(p.author)}</div>
+          <div style="flex:1">
+            <div style="font-weight:800">${escapeHtml(p.author)}</div>
+            <div class="small-muted">${escapeHtml(p.role)} · <small>${p.created}</small></div>
+          </div>
+          <div style="margin-left:8px;color:var(--muted);font-size:13px">${escapeHtml(p.category)}</div>
+        </div>
+        <h3>${escapeHtml(p.title)}</h3>
+        <p>${escapeHtml(p.text)}</p>
+      `;
+
+      if (p.media) {
+        if (p.media.type === 'image') {
+          const imgWrap = document.createElement('div');
+          imgWrap.className = 'media';
+          imgWrap.innerHTML = `<div class="media-inner">${p.media.src}</div>`;
+          post.appendChild(imgWrap);
+        } else if (p.media.type === 'video') {
+          const vidWrap = document.createElement('div');
+          vidWrap.className = 'media video-poster';
+          vidWrap.innerHTML = `
+            <div style="text-align:center;color:var(--muted)"><strong>Video placeholder</strong></div>
+            <div class="play-btn" title="Open video">▶</div>
+          `;
+          vidWrap.addEventListener('click', () => openVideoModal(p));
+          post.appendChild(vidWrap);
+        }
+      }
+
+      // tags example
+      const tags = document.createElement('div');
+      tags.className = 'tags';
+      const t1 = document.createElement('div'); t1.className='tag'; t1.textContent = p.category;
+      tags.appendChild(t1);
+      post.appendChild(tags);
+
+      feedEl.appendChild(post);
+    });
+  }
+
+  function initials(name) {
+    if(!name) return 'H';
+    return name.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+  }
+
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"]/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[s]));
+  }
+
+  // simple SVG placeholder generator (returns inline SVG string)
+  function svgPlaceholder(text, w=800, h=420, bg='#ffffff', accent='#f3f0ff'){
+    const safe = escapeHtml(text);
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${safe}">
+        <rect width="100%" height="100%" fill="${bg}" />
+        <rect x="0" y="${h-60}" width="100%" height="60" fill="${accent}" />
+        <text x="20" y="${h-26}" font-family="Arial, sans-serif" font-size="16" fill="#333">${safe}</text>
+      </svg>
+    `;
+    return svg;
+  }
+
+  // initial render
+  renderFeed();
+
+  // search & filter
+  function searchFeed(){
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    if(!q) { renderFeed(); return; }
+    const results = demoPosts.filter(p => (
+      (p.title && p.title.toLowerCase().includes(q)) ||
+      (p.text && p.text.toLowerCase().includes(q)) ||
+      (p.author && p.author.toLowerCase().includes(q)) ||
+      (p.role && p.role.toLowerCase().includes(q))
+    ));
+    renderFeed(results);
+  }
+  function filterCategory(cat){
+    if(cat === 'All') { renderFeed(); return; }
+    const results = demoPosts.filter(p => p.category === cat);
+    renderFeed(results);
+  }
+
+  // create post (local demo)
+  function openCreate(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const textarea = document.getElementById('postText');
+    textarea.focus();
+  }
+  function clearCreate(){
+    document.getElementById('postText').value = '';
+    document.getElementById('postImage').value = '';
+    document.getElementById('postVideo').value = '';
+  }
+  function submitPost(){
+    const txt = document.getElementById('postText').value.trim();
+    if(!txt) return alert('Write something first');
+    // create a simple post object (images/videos not persisted in demo)
+    const newPost = {
+      id: 'p' + Date.now(),
+      author: 'You',
+      role: 'Member',
+      category: 'Design',
+      title: txt.length > 60 ? txt.slice(0,57)+'...' : txt,
+      text: txt,
+      media: null,
+      created: 'just now'
+    };
+    demoPosts.unshift(newPost);
+    renderFeed();
+    clearCreate();
+    alert('Post created locally (demo). To save permanently, connect a backend (Firebase or Supabase).');
+  }
+
+  // profile create (demo)
+  function showRegister(){
+    const name = prompt('Enter your full name (demo):');
+    if(!name) return;
+    const role = prompt('Your role / skills (comma separated):','Designer');
+    alert('Profile created locally for demo: ' + name + ' — ' + role + '\nTo make real profiles, connect a backend.');
+  }
+
+  // video modal (demo)
+  function openVideoModal(post){
+    const modal = document.createElement('div');
+    modal.style.position='fixed';modal.style.left=0;modal.style.top=0;modal.style.width='100%';modal.style.height='100%';
+    modal.style.display='flex';modal.style.alignItems='center';modal.style.justifyContent='center';
+    modal.style.background='rgba(0,0,0,0.6)';modal.style.zIndex=9999;
+    const box = document.createElement('div');
+    box.style.width='80%';box.style.maxWidth='900px';box.style.background='white';box.style.borderRadius='12px';box.style.padding='14px';
+    box.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center">
+      <strong>${escapeHtml(post.title)}</strong>
+      <button style="background:transparent;border:0;font-size:18px;cursor:pointer" onclick="this.closest('.modal')?.remove()">✕</button>
+    </div>
+    <div style="margin-top:12px;color:var(--muted)">This is a demo video placeholder. In a real site this would play an uploaded video or stream.</div>
+    <div style="margin-top:12px;height:420px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#000;color:#fff">VIDEO (demo)</div>
+    <div style="margin-top:12px;text-align:right"><button class="btn btn-primary" onclick="document.body.removeChild(this.closest('div').parentNode)">Close</button></div>`;
+    modal.appendChild(box);
+    modal.className = 'modal';
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) document.body.removeChild(modal); });
+  }
+
+  // small helper: allow clicking play button on video placeholders
+  document.addEventListener('click', function(e){
+    if(e.target.closest('.play-btn')) {
+      // find post by title text near the play button
+      const postEl = e.target.closest('.post');
+      const title = postEl ? postEl.querySelector('h3')?.textContent : '';
+      const post = demoPosts.find(p=>p.title === title) || demoPosts[3];
+      openVideoModal(post);
+    }
+  });
+
+  // basic keyboard shortcut: press 'n' to focus new post textarea
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'n' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      openCreate();
+      setTimeout(()=>document.getElementById('postText').focus(),200);
+    }
+  });
+
+  // safe removal of HTML injection
+  // (escapeHtml used above)
+
+</script>
+</body>
+</html>
